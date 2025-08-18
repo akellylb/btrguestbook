@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh:*)",
+      "Bash(git config:*)",
+      "Bash(cp:*)",
+      "Bash(mkdir:*)",
+      "Bash(copy:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": [],
+    "additionalDirectories": [
+      "C:\\c\\Users\\AK\\Documents\\GitHub"
+    ]
+  }
+}
