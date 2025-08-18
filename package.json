@@ -2,7 +2,7 @@
   "name": "born-to-run-guestbook",
   "version": "1.0.0",
   "description": "Virtual guestbook for Born to Run exhibit at Arts & Cultural Center",
-  "main": "api/server.js",
+  "main": "server.js",
   "engines": {
     "node": ">=18.x"
   },
