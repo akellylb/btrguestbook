@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Born to Run - Virtual Guestbook | Arts & Cultural Center</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;600&family=Merriweather:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <header>
+        <div class="header-content">
+            <img src="logo-with-text.png" alt="Arts & Cultural Center Logo" class="header-logo">
+            <h1 class="main-title">Born to Run</h1>
+            <div class="subtitle">Bruce Springsteen Exhibition</div>
+            <div class="location">Arts & Cultural Center • Long Branch</div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h2>Sign Our Virtual Guestbook</h2>
+            </div>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="sign-section">
+                <form id="guestbook-form" class="sign-form">
+                    <h3>Leave Your Mark</h3>
+                    
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Your name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message (Optional)</label>
+                        <textarea id="message" name="message" rows="3" placeholder="Share your thoughts about the exhibit..."></textarea>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="newsletter" name="newsletter_signup">
+                            <span class="checkbox-text">Sign me up for the Arts Center newsletter</span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Sign Guestbook</button>
+                </form>
+                
+                <div id="success-message" class="success-message" style="display: none;">
+                    <div class="success-content">
+                        <h3>Thank You!</h3>
+                        <p>Your signature has been added to our guestbook.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Arts & Cultural Center • Long Branch, NJ</p>
+        <p class="footer-quote">"In the day we sweat it out on the streets of a runaway American dream"</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

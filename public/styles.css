@@ -1,0 +1,623 @@
+:root {
+    --primary-color: #000000;
+    --accent-color: #ffffff;
+    --text-light: #ffffff;
+    --text-dark: #000000;
+    --bg-dark: #000000;
+    --bg-light: #ffffff;
+    --border-color: #666;
+    --success-color: #ffffff;
+    --error-color: #f44336;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Oswald', sans-serif;
+    background-color: #ffffff;
+    background-image: url('born-to-run-cover.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: #000000;
+    min-height: 100vh;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.92);
+    z-index: -1;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+header {
+    background: #ffffff;
+    padding: 2rem 0;
+    text-align: center;
+    border-bottom: 4px solid #000000;
+    position: relative;
+    z-index: 10;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-content img {
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.main-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 4.5rem;
+    letter-spacing: 0.15em;
+    color: #000000;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: #000000;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.location {
+    font-size: 1rem;
+    color: #000000;
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+}
+
+main {
+    position: relative;
+    z-index: 2;
+    padding-bottom: 100px;
+}
+
+.hero-section {
+    padding: 2rem 0;
+    text-align: center;
+    position: relative;
+}
+
+.album-cover-accent {
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.album-cover-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 4px solid #000000;
+    border-radius: 10px;
+    box-shadow: 8px 8px 0px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.album-cover-image:hover {
+    transform: rotate(-2deg) scale(1.05);
+}
+
+.hero-content h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    color: #000000;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+    text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+}
+
+.hero-text {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.exhibit-info {
+    font-style: italic;
+    color: var(--accent-color);
+    font-size: 1rem;
+}
+
+.content-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 20px;
+}
+
+.sign-section {
+    background: rgba(255, 255, 255, 0.98);
+    border: 2px solid #000000;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 5px 5px 0px #000000;
+    backdrop-filter: blur(3px);
+}
+
+.sign-form h3 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    color: #000000;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    letter-spacing: 0.05em;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #000000;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    background: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    color: #000000;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: 'Oswald', sans-serif;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #000000;
+    background: #f0f0f0;
+    box-shadow: 3px 3px 0px #000000;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.75rem;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.checkbox-text {
+    color: #000000;
+    font-size: 0.95rem;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Oswald', sans-serif;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+}
+
+.submit-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.3);
+}
+
+.success-message {
+    background: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    animation: slideIn 0.5s ease;
+    box-shadow: 5px 5px 0px #000000;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-content h3 {
+    color: #000000;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 0.05em;
+}
+
+.success-content p {
+    color: #000000;
+}
+
+.signatures-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.section-header h3 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    color: var(--accent-color);
+    letter-spacing: 0.05em;
+}
+
+.stats {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    opacity: 0.8;
+}
+
+.stat-item {
+    padding: 0.25rem 0.75rem;
+    background: rgba(212, 175, 55, 0.2);
+    border-radius: 15px;
+    margin-left: 0.5rem;
+}
+
+.signatures-list {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.signatures-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.signatures-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.signatures-list::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 4px;
+}
+
+.signature-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--accent-color);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    animation: fadeIn 0.5s ease;
+}
+
+.signature-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.signature-name {
+    font-weight: 600;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.signature-message {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.signature-time {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    opacity: 0.6;
+}
+
+.pagination {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.pagination button {
+    padding: 0.5rem 1rem;
+    background: rgba(212, 175, 55, 0.2);
+    border: 1px solid var(--accent-color);
+    color: var(--text-light);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: var(--accent-color);
+    color: var(--bg-dark);
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination .page-info {
+    padding: 0.5rem 1rem;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+}
+
+.admin-section {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.export-btn, .admin-login-btn {
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #2c2c2c, #444);
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 0.5rem;
+}
+
+.export-btn:hover, .admin-login-btn:hover {
+    background: linear-gradient(135deg, var(--accent-color), #b8941f);
+    color: var(--bg-dark);
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    padding: 1.5rem;
+    text-align: center;
+    border-top: 3px solid #000000;
+    z-index: 10;
+}
+
+footer p {
+    color: #000000;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.footer-quote {
+    font-style: italic;
+    color: #000000;
+    opacity: 0.7;
+    font-size: 0.85rem;
+}
+
+.loading {
+    text-align: center;
+    color: var(--accent-color);
+    padding: 2rem;
+    font-size: 1.1rem;
+}
+
+/* Tablet Styles */
+@media (max-width: 1024px) {
+    .content-wrapper {
+        max-width: 90%;
+        padding: 1.5rem 20px;
+    }
+    
+    .main-title {
+        font-size: 4rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 2.2rem;
+    }
+    
+    .sign-section {
+        padding: 1.5rem;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+    }
+    
+    .header-content {
+        padding: 0 15px;
+    }
+    
+    .header-content img {
+        max-width: 250px;
+    }
+    
+    .main-title {
+        font-size: 3rem;
+        letter-spacing: 0.1em;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .location {
+        font-size: 0.9rem;
+    }
+    
+    .hero-section {
+        padding: 1.5rem 0;
+    }
+    
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+    
+    .content-wrapper {
+        max-width: 95%;
+        padding: 1rem 15px;
+    }
+    
+    .sign-section {
+        padding: 1.5rem;
+        margin: 0 10px;
+    }
+    
+    .sign-form h3 {
+        font-size: 1.8rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 0.8rem;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .submit-btn {
+        padding: 1.2rem;
+        font-size: 1rem;
+    }
+    
+    footer {
+        padding: 1rem;
+    }
+    
+    footer p {
+        font-size: 0.8rem;
+    }
+    
+    .footer-quote {
+        font-size: 0.75rem;
+    }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+    .header-content img {
+        max-width: 200px;
+    }
+    
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .content-wrapper {
+        padding: 1rem 10px;
+    }
+    
+    .sign-section {
+        padding: 1.2rem;
+        margin: 0 5px;
+    }
+    
+    .sign-form h3 {
+        font-size: 1.6rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.2rem;
+    }
+    
+    .form-group label {
+        font-size: 0.95rem;
+    }
+    
+    .checkbox-text {
+        font-size: 0.9rem;
+    }
+    
+    footer {
+        position: relative;
+        margin-top: 2rem;
+    }
+    
+    main {
+        padding-bottom: 0;
+    }
+}

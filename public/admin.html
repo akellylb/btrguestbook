@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Born to Run Guestbook</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <div class="background-overlay"></div>
+    
+    <header>
+        <div class="header-content">
+            <img src="logo-with-text.png" alt="Arts & Cultural Center Logo" class="header-logo">
+            <h1 class="admin-title">Admin Dashboard</h1>
+            <div class="subtitle">Guestbook Management</div>
+        </div>
+    </header>
+
+    <main>
+        <div id="login-section" class="login-section">
+            <div class="login-container">
+                <h2>Admin Login</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Login</button>
+                </form>
+                <div id="login-error" class="error-message" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div id="dashboard-section" class="dashboard-section" style="display: none;">
+            <div class="dashboard-header">
+                <h2>Dashboard Overview</h2>
+                <button id="logout-btn" class="logout-btn">Logout</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Signatures</h3>
+                    <div class="stat-number" id="total-signatures">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Newsletter Signups</h3>
+                    <div class="stat-number" id="newsletter-signups">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Today's Signatures</h3>
+                    <div class="stat-number" id="today-signatures">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>This Week</h3>
+                    <div class="stat-number" id="week-signatures">0</div>
+                </div>
+            </div>
+
+            <div class="daily-stats-section">
+                <h3>Daily Statistics</h3>
+                <div id="daily-chart" class="chart-container">
+                    <canvas id="dailyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="export-section">
+                <h3>Export Options</h3>
+                <div class="export-buttons">
+                    <button id="export-all-btn" class="export-btn">
+                        Export All Data (CSV)
+                    </button>
+                    <button id="export-newsletter-btn" class="export-btn">
+                        Export Newsletter Subscribers (Mailchimp Format)
+                    </button>
+                    <button id="export-date-range-btn" class="export-btn">
+                        Export by Date Range
+                    </button>
+                </div>
+                
+                <div id="date-range-picker" class="date-range-picker" style="display: none;">
+                    <div class="date-inputs">
+                        <div class="form-group">
+                            <label for="start-date">Start Date</label>
+                            <input type="date" id="start-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="end-date">End Date</label>
+                            <input type="date" id="end-date">
+                        </div>
+                        <button id="export-range-confirm" class="submit-btn">Export</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-entries-section">
+                <h3>Recent Entries</h3>
+                <div class="table-container">
+                    <table id="entries-table">
+                        <thead>
+                            <tr>
+                                <th>Date/Time</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Newsletter</th>
+                                <th>Message</th>
+                            </tr>
+                        </thead>
+                        <tbody id="entries-tbody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination" id="admin-pagination"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Arts & Cultural Center • Long Branch, NJ</p>
+        <p><a href="/" style="color: var(--accent-color);">Back to Guestbook</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
