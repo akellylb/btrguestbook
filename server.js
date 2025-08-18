@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
@@ -20,16 +19,55 @@ const JWT_SECRET = process.env.JWT_SECRET || 'default-secret-change-this';
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
 const ADMIN_PASSWORD_HASH = bcrypt.hashSync(process.env.ADMIN_PASSWORD || 'admin123', 10);
 
-const db = new sqlite3.Database('./guestbook.db', (err) => {
-    if (err) {
-        console.error('Error opening database:', err);
-    } else {
-        console.log('Connected to the SQLite database.');
-        initDatabase();
-    }
-});
+// Database setup - SQLite for local, PostgreSQL for production
+let db;
+let isPostgres = false;
 
-function initDatabase() {
+if (process.env.POSTGRES_URL || process.env.POSTGRES_PRISMA_URL) {
+    // Production - PostgreSQL
+    const { Pool } = require('pg');
+    isPostgres = true;
+    
+    const connectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL;
+    db = new Pool({
+        connectionString,
+        ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+    });
+    
+    console.log('Using PostgreSQL database');
+    initPostgresDatabase();
+} else {
+    // Local development - SQLite
+    const sqlite3 = require('sqlite3').verbose();
+    db = new sqlite3.Database('./guestbook.db', (err) => {
+        if (err) {
+            console.error('Error opening database:', err);
+        } else {
+            console.log('Connected to SQLite database');
+            initSQLiteDatabase();
+        }
+    });
+}
+
+async function initPostgresDatabase() {
+    try {
+        await db.query(`
+            CREATE TABLE IF NOT EXISTS signatures (
+                id SERIAL PRIMARY KEY,
+                name TEXT NOT NULL,
+                email TEXT NOT NULL,
+                newsletter_signup BOOLEAN DEFAULT FALSE,
+                message TEXT,
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        `);
+        console.log('PostgreSQL table ready');
+    } catch (err) {
+        console.error('Error creating PostgreSQL table:', err);
+    }
+}
+
+function initSQLiteDatabase() {
     db.run(`CREATE TABLE IF NOT EXISTS signatures (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
@@ -39,9 +77,9 @@ function initDatabase() {
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
     )`, (err) => {
         if (err) {
-            console.error('Error creating table:', err);
+            console.error('Error creating SQLite table:', err);
         } else {
-            console.log('Database table ready.');
+            console.log('SQLite table ready.');
         }
     });
 }
@@ -63,7 +101,7 @@ function authenticateToken(req, res, next) {
     });
 }
 
-app.post('/api/sign', (req, res) => {
+app.post('/api/sign', async (req, res) => {
     const { name, email, newsletter_signup, message } = req.body;
     
     if (!name || !email) {
@@ -75,20 +113,37 @@ app.post('/api/sign', (req, res) => {
         return res.status(400).json({ error: 'Invalid email format' });
     }
     
-    const stmt = db.prepare(`INSERT INTO signatures (name, email, newsletter_signup, message) VALUES (?, ?, ?, ?)`);
-    stmt.run(name, email, newsletter_signup ? 1 : 0, message || '', function(err) {
-        if (err) {
-            console.error('Error inserting signature:', err);
-            res.status(500).json({ error: 'Failed to save signature' });
-        } else {
+    try {
+        if (isPostgres) {
+            const result = await db.query(
+                'INSERT INTO signatures (name, email, newsletter_signup, message) VALUES ($1, $2, $3, $4) RETURNING id',
+                [name, email, newsletter_signup || false, message || '']
+            );
             res.json({ 
                 success: true, 
-                id: this.lastID,
+                id: result.rows[0].id,
                 message: 'Thank you for signing the guestbook!' 
             });
+        } else {
+            const stmt = db.prepare(`INSERT INTO signatures (name, email, newsletter_signup, message) VALUES (?, ?, ?, ?)`);
+            stmt.run(name, email, newsletter_signup ? 1 : 0, message || '', function(err) {
+                if (err) {
+                    console.error('Error inserting signature:', err);
+                    res.status(500).json({ error: 'Failed to save signature' });
+                } else {
+                    res.json({ 
+                        success: true, 
+                        id: this.lastID,
+                        message: 'Thank you for signing the guestbook!' 
+                    });
+                }
+            });
+            stmt.finalize();
         }
-    });
-    stmt.finalize();
+    } catch (error) {
+        console.error('Error inserting signature:', error);
+        res.status(500).json({ error: 'Failed to save signature' });
+    }
 });
 
 app.get('/api/entries', (req, res) => {
