@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "Virtual guestbook for Born to Run exhibit at Arts & Cultural Center",
   "main": "server.js",
+  "engines": {
+    "node": ">=18.x"
+  },
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "build": "echo 'No build step required'"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
